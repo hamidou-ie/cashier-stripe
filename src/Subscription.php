@@ -1224,6 +1224,13 @@ class Subscription extends Model
         );
     }
 
+    public function getInvoice($includePending = false, $parameters = [])
+    {
+        return $this->owner->getInvoice(
+            $includePending, array_merge($parameters, ['subscription' => $this->stripe_id])
+        );
+    }
+
     /**
      * Get an array of the subscription's invoices, including pending invoices.
      *

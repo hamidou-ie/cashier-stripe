@@ -302,6 +302,35 @@ trait ManagesInvoices
         return new Collection($invoices);
     }
 
+    public function getInvoice($includePending = false, $parameters = [])
+    {
+        if (! $this->hasStripeId()) {
+            return new Collection();
+        }
+
+        $invoices = [];
+
+        $parameters = array_merge(['limit' => 24], $parameters);
+
+        $stripeInvoices = static::stripe()->invoices->all(
+            ['customer' => $this->stripe_id] + $parameters
+        );
+
+        return $stripeInvoices;
+        // Here we will loop through the Stripe invoices and create our own custom Invoice
+        // instances that have more helper methods and are generally more convenient to
+        // work with than the plain Stripe objects are. Then, we'll return the array.
+        // if (! is_null($stripeInvoices)) {
+        //     foreach ($stripeInvoices->data as $invoice) {
+        //         if ($invoice->paid || $includePending) {
+        //             $invoices[] = new Invoice($this, $invoice);
+        //         }
+        //     }
+        // }
+
+        // return new Collection($invoices);
+    }
+
     /**
      * Get an array of the customer's invoices, including pending invoices.
      *
