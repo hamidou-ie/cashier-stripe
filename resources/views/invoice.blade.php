@@ -109,7 +109,7 @@
                 @endisset
 
                 @isset($url)
-                    <a href="{{ $url }}">{{ $url }}</a><br>
+                    {{-- <a href="{{ $url }}">{{ $url }}</a><br> --}}
                 @endisset
 
                 @isset($vendorVat)
@@ -311,10 +311,38 @@
                     <tr>
                         <td></td>
                         <td colspan="{{ $invoice->hasTax() ? 3 : 2 }}">
-                            <strong>Amount due</strong>
+                            <strong>Amount due </strong> excluding tax
                         </td>
                         <td align="right">
                             <strong>{{ $invoice->amountDue() }}</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="{{ $invoice->hasTax() ? 3 : 2 }}">
+                            <strong>Finacial department</strong>
+                        </td>
+                        <td>
                         </td>
                     </tr>
                 </table>
